@@ -3,7 +3,7 @@ const { MongoClient } = require("mongodb");
 const app = express();
 require("dotenv").config();
 const cors = require("cors");
-const port = process.env.port || 5000;
+const port = process.env.PORT || 5000;
 
 // MidlleWare
 app.use(cors());
