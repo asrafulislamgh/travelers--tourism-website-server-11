@@ -22,6 +22,7 @@ async function run() {
     // Creating DB
     const database = client.db("tourism_db");
     const servicesCollection = database.collection("tourism_services");
+    const orderCollection = database.collection("orders");
 
     // GET API
     app.get("/services", async (req, res) => {
@@ -31,12 +32,27 @@ async function run() {
       res.send(services);
     });
 
+    app.get("/booking", async (req, res) => {
+      console.log("Order get api is working");
+      const cursor = orderCollection.find({});
+      const orders = await cursor.toArray();
+      res.send(orders);
+    });
+
     // POST API
     app.post("/services", async (req, res) => {
       console.log("Lets do post", req.body);
       const service = req.body;
       const result = await servicesCollection.insertOne(service);
       res.json(result);
+    });
+
+    // Booking new item
+    app.post("/booking", async (req, res) => {
+      console.log("booking a new item", req.body);
+      const order = req.body;
+      const result = await orderCollection.insertOne(order);
+      res.json("lets try");
     });
   } finally {
     // await client.close();
