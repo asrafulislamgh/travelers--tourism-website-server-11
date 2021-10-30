@@ -54,6 +54,15 @@ async function run() {
       const result = await orderCollection.insertOne(order);
       res.json("lets try");
     });
+
+    // Delete API
+    app.delete("/booking/:id", async (req, res) => {
+      const id = req.params.id;
+      const query = { _id: id };
+      const result = await orderCollection.deleteOne(query);
+      res.send(result);
+      // console.log("I am deleting items: ", result);
+    });
   } finally {
     // await client.close();
   }
