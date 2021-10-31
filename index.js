@@ -24,6 +24,7 @@ async function run() {
     const database = client.db("tourism_db");
     const servicesCollection = database.collection("tourism_services");
     const orderCollection = database.collection("orders");
+    const galleryCollection = database.collection("gallery");
 
     // GET API
     app.get("/services", async (req, res) => {
@@ -36,6 +37,13 @@ async function run() {
     app.get("/booking", async (req, res) => {
       console.log("Order get api is working");
       const cursor = orderCollection.find({});
+      const orders = await cursor.toArray();
+      res.send(orders);
+    });
+
+    app.get("/gallery", async (req, res) => {
+      console.log("gallery");
+      const cursor = galleryCollection.find({});
       const orders = await cursor.toArray();
       res.send(orders);
     });
