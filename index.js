@@ -64,6 +64,13 @@ async function run() {
       res.send(result);
       // console.log("I am deleting items: ", result);
     });
+
+    // UPDATING API
+    app.put("/allorders", async (req, res) => {
+      const id = req.body;
+      console.log(id);
+      res.send(id);
+    });
   } finally {
     // await client.close();
   }
