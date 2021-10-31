@@ -3,6 +3,7 @@ const { MongoClient } = require("mongodb");
 const app = express();
 require("dotenv").config();
 const cors = require("cors");
+const ObjectId = require("mongodb").ObjectId;
 const port = process.env.PORT || 5000;
 
 // MidlleWare
@@ -58,7 +59,7 @@ async function run() {
     // Delete API
     app.delete("/booking/:id", async (req, res) => {
       const id = req.params.id;
-      const query = { _id: id };
+      const query = { _id: ObjectId(id) };
       const result = await orderCollection.deleteOne(query);
       res.send(result);
       // console.log("I am deleting items: ", result);
