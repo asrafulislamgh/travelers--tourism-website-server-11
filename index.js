@@ -66,10 +66,16 @@ async function run() {
     });
 
     // UPDATING API
-    app.put("/allorders", async (req, res) => {
-      const id = req.body;
-      console.log(id);
-      res.send(id);
+    app.put("/update/:id", async (req, res) => {
+      const id = req.params.id;
+      const filter = { _id: ObjectId(id) };
+      const result = await orderCollection.updateOne(filter, {
+        $set: {
+          status: 1,
+        },
+      });
+      console.log(result);
+      res.json(result);
     });
   } finally {
     // await client.close();
